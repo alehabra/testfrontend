@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="table">
+    <HeaderComponent/>
+    <ListComponent/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
+import ListComponent from "@/components/ListComponent.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    ListComponent,
+    HeaderComponent
   },
+  data:() => {
+    return{
+      list:[],
+      detail:{}
+    }
+  },
+  beforeMount() { 
+    this.$store.dispatch('getMatches')  //chiamata API nello vuex store
+  }
 };
 </script>

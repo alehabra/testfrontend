@@ -18,6 +18,7 @@ additional libraries for development used:
 * Vue CLI
 * Vuex
 * Dart Sass
+* Moment js
 
 dependencies
 * Node js
