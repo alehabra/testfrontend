@@ -85,36 +85,35 @@ export default new Vuex.Store({
       //id più grande e più piccolo
       let max = Math.max(...state.matchIdList);
       let min = Math.min(...state.matchIdList);
+
+      //decremento id + piccolo
       min = min - 2;
+
+      //assegno id minimo all'array di appoggio matchIdList
       state.matchIdList.unshift(min);
+
+      let MatchMax;
 
       //creo oggetto match copiando dall'oggetto con id più grande
       for (let i = 0; i < state.matchIdList.length; i++) {
         let matchRef = state.matchIdList[i].toString();
 
+        //identifico oggetto dal suo id
         if(Object.prototype.hasOwnProperty.call(state.matchDetailList, matchRef)) {
           if(matchRef === max.toString()){
             
-            //creo oggetto con id più alto e assegno l'id + piccolo
-            let MatchMax = state.matchDetailList[matchRef];
-            MatchMax._id = min;
-            
-
-            //assegno l'oggetto a matchDetailList
-            let keyMatch = max.toString();
-            let MatchMaxDetail = { [keyMatch] : MatchMax };
-            console.log(MatchMaxDetail)
-            
-            state.matchDetailList[keyMatch] = MatchMax;
-            //Object.assign(state.matchDetailList, MatchMaxDetail);
-            console.log(state.matchDetailList);
-            
-
-            //assegno all'array allMatches
-            state.allMatches.unshift(MatchMax);
+            //creo oggetto con id più alto
+            MatchMax = Object.assign({},state.matchDetailList[matchRef]);
           };
         }
       }
+
+      //assegno l'id + piccolo all'oggetto match
+      let keyMatch = min.toString();
+      MatchMax._id = min;
+
+      //assegno l'oggetto  creato a matchDetailList
+     state.matchDetailList[keyMatch] = MatchMax;
     }
   },
 

@@ -66,7 +66,10 @@ $secondary: #1c1919;
     margin:2rem auto 3rem auto;
     border-radius: 0.5rem;
     color: #1c1919;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1023px) {
+        width:90%;
+    }
+    @media screen and (max-width: 1400px) {
         width:90%;
     }
     .table-columns{
@@ -78,16 +81,17 @@ $secondary: #1c1919;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1023px) {
             padding:1rem;
-
+            margin-bottom:2rem;
         }
         .table-column-id{
             font-size:0.8rem;
             font-weight: 600;
             color:#8f8b8b;
-            @media screen and (max-width: 1024px) {
-                text-align: left;
+            @media screen and (max-width: 1023px) {
+                align-self: flex-start;
+                min-width: 100%;
             }
         }
         .table-column-info{
@@ -95,11 +99,11 @@ $secondary: #1c1919;
             justify-content: space-around;
             flex-direction: row;
             align-items: center;
-            @media screen and (max-width: 1024px) {
+            @media screen and (max-width: 1023px) {
                 flex-direction: column;
             }
             .table-column-match{
-                @media screen and (max-width: 1024px) {
+                @media screen and (max-width: 1023px) {
                     min-width: 100%;
                     justify-content: center;
                     margin:1.5rem 0rem;
@@ -109,10 +113,12 @@ $secondary: #1c1919;
                 align-items: center;
                 min-width: 45%;
                 .table-column-away,.table-column-home{
-                    @media screen and (max-width: 1024px) {
-                        min-width: auto;
-                        max-width: 30%;
+                    @media screen and (max-width: 1023px) {
+                        min-width: 33%;
                         font-size: 0.9rem;
+                    }
+                    @media screen and (max-width: 1400px) {
+                        min-width: 35%;
                     }
                     min-width: 30%;
                 }
@@ -122,8 +128,12 @@ $secondary: #1c1919;
                     padding:0rem 1rem;
                 }
                 .table-column-results{
-                    @media screen and (max-width: 1024px) {
+                    @media screen and (max-width: 1023px) {
                         font-size: 0.9rem;
+                        min-width: 10%;
+                    }
+                    @media screen and (max-width: 1400px) {
+                        width:10%;
                     }
                     background: #273652;
                     color: white;
@@ -143,6 +153,9 @@ $secondary: #1c1919;
                 color: #48494d;
                 text-align: center;
                 min-width:10%;
+                @media screen and (max-width: 1023px) {
+                    margin-bottom:1.5rem;
+                }
             }
         }
     }

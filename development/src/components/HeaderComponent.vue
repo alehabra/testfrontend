@@ -1,7 +1,7 @@
 <template>
     <header id="header">
         <div class="header-title">
-            <h1>FOOTBALL LEAGUE</h1>
+            <h3>FOOTBALL LEAGUE</h3>
         </div>
         <div class="header-buttons">
             <button class="header-btn-add" v-on:click="updateMatch()">
@@ -28,7 +28,7 @@ export default {
     #header{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         width:100%;
         margin:0rem auto;
         border-radius: 0.5rem;
@@ -37,6 +37,15 @@ export default {
         align-items: center;
         .header-title{
             align-self: center;
+            h3{
+                text-align: left;
+                color: #273652;
+                margin:0rem;
+                font-size:1.3rem;
+                @media screen and (max-width: 1023px) {
+                    font-size: 1rem;
+                }
+            }
         }
         .header-buttons{
             align-self: center;
@@ -54,6 +63,10 @@ export default {
                 font-size:1rem;
                 text-transform: capitalize;
                 padding:0.5rem 1.8rem;
+                @media screen and (max-width: 1023px) {
+                    padding: 0.5rem 0.9rem;
+                    font-size: 0.8rem;
+                }
                 span{
                     padding:0rem 0.3rem;
                 }
