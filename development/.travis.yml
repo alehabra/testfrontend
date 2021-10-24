@@ -12,4 +12,4 @@ deploy:
  github_token: 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
  local_dir: dist
  on:
-   branch: main
+   branch: main 
