@@ -1,7 +1,7 @@
 <template>
   <div id="table">
-    <HeaderComponent/>
-    <ListComponent/>
+    <HeaderComponent />
+    <ListComponent />
   </div>
 </template>
 
@@ -13,16 +13,16 @@ export default {
   name: "Home",
   components: {
     ListComponent,
-    HeaderComponent
+    HeaderComponent,
   },
-  data:() => {
-    return{
-      list:[],
-      detail:{}
-    }
+  data: () => {
+    return {
+      list: [],
+      detail: {},
+    };
   },
-  beforeMount() { 
-    this.$store.dispatch('getMatches')  //chiamata API nello vuex store
-  }
+  beforeMount() {
+    this.$store.dispatch("getMatches"); //chiamata API nello vuex store
+  },
 };
 </script>

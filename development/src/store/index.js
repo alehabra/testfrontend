@@ -6,82 +6,85 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    matchResponse:{}, //json di partenza
-    matchIdList:[], //lista id match
-    matchDetailList:{}, //oggetto dettaglio match
-    allMatches:[], //store locale con dettaglio match
+    matchResponse: {}, //json di partenza
+    matchIdList: [], //lista id match
+    matchDetailList: {}, //oggetto dettaglio match
+    allMatches: [], //store locale con dettaglio match
   },
 
-  actions: { 
+  actions: {
     getMatches({ commit }) {
-      axios.get('https://www.dontouch.ch/json/cc.json')
-          .then(response => {
-              //popolo lo state store
-              commit('SET_RESPONSE', response.data);  //Risposta totale
+      axios.get("https://www.dontouch.ch/json/cc.json").then((response) => {
+        //popolo lo state store
+        commit("SET_RESPONSE", response.data); //Risposta totale
 
-              //seleziono id match
-              commit('SET_ID', response.data.doc[0].data.seasons[76925].matches);  //ID Matches
+        //seleziono id match
+        commit("SET_ID", response.data.doc[0].data.seasons[76925].matches); //ID Matches
 
-              //seleziono dettagli match
-              commit('SET_DETAILS', response.data.doc[0].data.matches);  //Details Matches
+        //seleziono dettagli match
+        commit("SET_DETAILS", response.data.doc[0].data.matches); //Details Matches
 
-              //mutation con creazione array match
-              commit('SET_MATCHES'); 
-      })
+        //mutation con creazione array match
+        commit("SET_MATCHES");
+      });
     },
     deleteStoreMatches({ commit }, matchId) {
       //elimino dallo state i riferimenti all'id match
-      commit('DELETE_MATCHES', matchId); 
+      commit("DELETE_MATCHES", matchId);
 
       //mutation con creazione array match
-      commit('SET_MATCHES'); 
+      commit("SET_MATCHES");
     },
-    updateMatches({ commit }){
+    updateMatches({ commit }) {
       //mutation con update match
-      commit('UPDATE_MATCHES');
+      commit("UPDATE_MATCHES");
 
       //mutation con creazione array match
-      commit('SET_MATCHES'); 
-    }
-   },
+      commit("SET_MATCHES");
+    },
+  },
 
   mutations: {
     SET_RESPONSE(state, res) {
-      state.matchResponse = res
+      state.matchResponse = res;
     },
     SET_ID(state, res) {
-      state.matchIdList = res
+      state.matchIdList = res;
     },
     SET_DETAILS(state, res) {
-      state.matchDetailList = res
+      state.matchDetailList = res;
     },
-    SET_MATCHES(state){
+    SET_MATCHES(state) {
       //svuoto allMatches
       state.allMatches = [];
 
       //assegno l'oggetto match ad un array state basandomi sull'id
       for (let i = 0; i < state.matchIdList.length; i++) {
         let matchRef = state.matchIdList[i].toString();
-        if(Object.prototype.hasOwnProperty.call(state.matchDetailList, matchRef)) {
+        if (
+          Object.prototype.hasOwnProperty.call(state.matchDetailList, matchRef)
+        ) {
           let singleMatch = state.matchDetailList[matchRef];
           state.allMatches.push(singleMatch);
         }
       }
     },
-    DELETE_MATCHES(state, res){
-        //elimino l'id dalla lista id
-        if (state.matchIdList.indexOf(res) !== -1){
-          let index = state.matchIdList.indexOf(res);  
-          state.matchIdList.splice(index,1);
-        }
+    DELETE_MATCHES(state, res) {
+      //elimino l'id dalla lista id
+      if (state.matchIdList.indexOf(res) !== -1) {
+        let index = state.matchIdList.indexOf(res);
+        state.matchIdList.splice(index, 1);
+      }
 
-        //elimino l'oggetto di dettaglio match dalla allMatches basandomi slla chiave id
-        let toRemove = res.toString();
-        if(Object.prototype.hasOwnProperty.call(state.matchDetailList, toRemove)) {
+      //elimino l'oggetto di dettaglio match dalla allMatches basandomi slla chiave id
+      let toRemove = res.toString();
+      if (
+        Object.prototype.hasOwnProperty.call(state.matchDetailList, toRemove)
+      ) {
         delete state.matchDetailList[toRemove];
-        }
+      }
     },
-    UPDATE_MATCHES(state){
+    UPDATE_MATCHES(state) {
       //id più grande e più piccolo
       let max = Math.max(...state.matchIdList);
       let min = Math.min(...state.matchIdList);
@@ -99,12 +102,13 @@ export default new Vuex.Store({
         let matchRef = state.matchIdList[i].toString();
 
         //identifico oggetto dal suo id
-        if(Object.prototype.hasOwnProperty.call(state.matchDetailList, matchRef)) {
-          if(matchRef === max.toString()){
-            
+        if (
+          Object.prototype.hasOwnProperty.call(state.matchDetailList, matchRef)
+        ) {
+          if (matchRef === max.toString()) {
             //creo oggetto con id più alto
-            MatchMax = Object.assign({},state.matchDetailList[matchRef]);
-          };
+            MatchMax = Object.assign({}, state.matchDetailList[matchRef]);
+          }
         }
       }
 
@@ -113,11 +117,13 @@ export default new Vuex.Store({
       MatchMax._id = min;
 
       //assegno l'oggetto  creato a matchDetailList
-     state.matchDetailList[keyMatch] = MatchMax;
-    }
+      state.matchDetailList[keyMatch] = MatchMax;
+    },
   },
 
   getters: {
-    allDetailMatch: (state) => { return state.allMatches }
-  }
+    allDetailMatch: (state) => {
+      return state.allMatches;
+    },
+  },
 });

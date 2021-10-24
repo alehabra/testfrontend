@@ -5,8 +5,8 @@
 </template>
 
 <style lang="scss">
-body{
-  background:#f5eceb;
+body {
+  background: #f5eceb;
 }
 
 #app {
@@ -15,5 +15,4 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
 </style>
